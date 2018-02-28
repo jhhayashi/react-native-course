@@ -1,4 +1,4 @@
-const NUM_CONTACTS = 1000
+const NUM_CONTACTS = 100
 
 const firstNames = ['Emma','Noah','Olivia','Liam','Ava','William','Sophia','Mason','Isabella','James','Mia','Benjamin','Charlotte','Jacob','Abigail','Michael','Emily','Elijah','Harper','Ethan','Amelia','Alexander','Evelyn','Oliver','Elizabeth','Daniel','Sofia','Lucas','Madison','Matthew','Avery','Aiden','Ella','Jackson','Scarlett','Logan','Grace','David','Chloe','Joseph','Victoria','Samuel','Riley','Henry','Aria','Owen','Lily','Sebastian','Aubrey','Gabriel','Zoey','Carter','Penelope','Jayden','Lillian','John','Addison','Luke','Layla','Anthony','Natalie','Isaac','Camila','Dylan','Hannah','Wyatt','Brooklyn','Andrew','Zoe','Joshua','Nora','Christopher','Leah','Grayson','Savannah','Jack','Audrey','Julian','Claire','Ryan','Eleanor','Jaxon','Skylar','Levi','Ellie','Nathan','Samantha','Caleb','Stella','Hunter','Paisley','Christian','Violet','Isaiah','Mila','Thomas','Allison','Aaron','Alexa','Lincoln']
 
@@ -22,5 +22,5 @@ export const compareNames = (contact1, contact2) => contact1.name > contact2.nam
 // add keys to based on index
 const addKeys = (val, key) => ({key, ...val})
 
-// create an array of length NUM_CONTACTS and alphabetize by name
+// create an array of length NUM_CONTACTS and add keys
 export default Array.from({length: NUM_CONTACTS}, createContact).map(addKeys)
