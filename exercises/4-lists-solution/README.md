@@ -1,4 +1,4 @@
-# Lists
+# Lists Solution
 In lecture we talked about scrolling views and a couple types of performant
 virtualized lists ([`FlatList`](https://facebook.github.io/react-native/docs/flatlist.html)
 and [`SectionList`](https://facebook.github.io/react-native/docs/sectionlist.html)).
@@ -24,7 +24,3 @@ If you want a challenge, try adding a view to add/modify these key/value pairs.
 
 Hint: Use [`JSON.parse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
 to parse strings into JS values.
-
-## Solution
-See the solution's code [here](../4-lists-solution), or run it without looking at the code
-to play with the functionality.
