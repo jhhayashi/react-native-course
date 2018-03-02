@@ -7,6 +7,10 @@ The goal of this exercise is to get used to the change in paradigm between norma
 views that render all of their children and these virtualized lists that take
 data and a renderer.
 
+## Installation
+This exercise was bootstrapped using the [Expo XDE](https://docs.expo.io/versions/latest/introduction/xde-tour.html).
+To run it, open this directory as a project in the XDE.
+
 ## Exercise
 For this exercise, you will be writing a component that allows easy viewing of
 objects. This should be created using a `SectionList`, where the section headers
