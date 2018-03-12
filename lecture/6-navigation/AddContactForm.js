@@ -1,6 +1,12 @@
-import React from 'react'
-import {Button, KeyboardAvoidingView, StyleSheet, TextInput, View} from 'react-native'
-import {Constants} from 'expo'
+import React from 'react';
+import {
+  Button,
+  KeyboardAvoidingView,
+  StyleSheet,
+  TextInput,
+  View,
+} from 'react-native';
+import { Constants } from 'expo';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,29 +23,32 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 3,
   },
-})
+});
 
 export default class AddContactForm extends React.Component {
   state = {
     name: '',
     phone: '',
     isFormValid: false,
-  }
+  };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.name !== prevState.name || this.state.phone !== prevState.phone) {
-      this.validateForm()
+    if (
+      this.state.name !== prevState.name ||
+      this.state.phone !== prevState.phone
+    ) {
+      this.validateForm();
     }
   }
 
   getHandler = key => val => {
-    this.setState({[key]: val})
-  }
+    this.setState({ [key]: val });
+  };
 
-  handleNameChange = this.getHandler('name') // val => { this.setState({name: val}) }
-  handlePhoneChange = this.getHandler('phone')
+  handleNameChange = this.getHandler('name'); // val => { this.setState({name: val}) }
+  handlePhoneChange = this.getHandler('phone');
 
-    /*
+  /*
   handleNameChange = name => {
     this.setState({name})
   }
@@ -47,32 +56,41 @@ export default class AddContactForm extends React.Component {
 
   handlePhoneChange = phone => {
     if (+phone >= 0 && phone.length <= 10) {
-      this.setState({phone})
+      this.setState({ phone });
     }
-  }
+  };
 
   validateForm = () => {
-    console.log(this.state)
-    const names = this.state.name.split(' ')
-    if (+this.state.phone >= 0 && this.state.phone.length === 10 && names.length >= 2 && names[0] && names[1]) {
-      this.setState({isFormValid: true})
+    console.log(this.state);
+    const names = this.state.name.split(' ');
+    if (
+      +this.state.phone >= 0 &&
+      this.state.phone.length === 10 &&
+      names.length >= 2 &&
+      names[0] &&
+      names[1]
+    ) {
+      this.setState({ isFormValid: true });
     } else {
-      this.setState({isFormValid: false})
+      this.setState({ isFormValid: false });
     }
-  }
+  };
 
   validateForm2 = () => {
-    if (+this.state.phone >= 0 && this.state.phone.length === 10 && this.state.name.length >= 3) {
-      return true
+    if (
+      +this.state.phone >= 0 &&
+      this.state.phone.length === 10 &&
+      this.state.name.length >= 3
+    ) {
+      return true;
     } else {
-      return false
+      return false;
     }
-  }
-
+  };
 
   handleSubmit = () => {
-    this.props.onSubmit(this.state)
-  }
+    this.props.onSubmit(this.state);
+  };
 
   render() {
     return (
@@ -90,8 +108,12 @@ export default class AddContactForm extends React.Component {
           onChangeText={this.getHandler('phone')}
           placeholder="Phone"
         />
-        <Button title="Submit" onPress={this.handleSubmit} disabled={!this.state.isFormValid} />
+        <Button
+          title="Submit"
+          onPress={this.handleSubmit}
+          disabled={!this.state.isFormValid}
+        />
       </KeyboardAvoidingView>
-    )
+    );
   }
 }
