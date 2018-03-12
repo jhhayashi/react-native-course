@@ -1,67 +1,86 @@
-import React from 'react';
-import {
-  Button,
-  FlatList,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import { Constants } from 'expo';
+// import Example from './examples/0-Switch';
+// import Example from './examples/1-Stack';
+// export default Example;
 
-import contacts, { compareNames } from './contacts';
-import ScrollViewContacts from './ScrollViewContacts';
-import FlatListContacts from './FlatListContacts';
-import SectionListContacts from './SectionListContacts';
-import AddContactForm from './AddContactForm';
+import React from "react";
+import { StatusBar, View } from "react-native";
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
+import Ionicons from "react-native-vector-icons/Ionicons";
+
+import AddContactScreen from "./screens/AddContactScreen";
+import SettingsScreen from "./screens/SettingsScreen";
+import ContactListScreen from "./screens/ContactListScreen";
+import ContactDetailsScreen from "./screens/ContactDetailsScreen";
+import LoginScreen from "./screens/LoginScreen";
+import contacts from "./contacts";
+
+const MainStack = createStackNavigator(
+  {
+    ContactList: ContactListScreen,
+    ContactDetails: ContactDetailsScreen,
+    AddContact: AddContactScreen
+  },
+  {
+    initialRouteName: "ContactList",
+    navigationOptions: {
+      headerTintColor: "#a41034",
+      headerStyle: {
+        backgroundColor: "#fff"
+      }
+    }
+  }
+);
+
+MainStack.navigationOptions = {
+  tabBarIcon: ({ focused, tintColor }) => (
+    <Ionicons
+      name={`ios-contacts${focused ? "" : "-outline"}`}
+      size={25}
+      color={tintColor}
+    />
+  )
+};
+
+const MainTabs = createBottomTabNavigator(
+  {
+    Contacts: MainStack,
+    Settings: SettingsScreen
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: "#a41034"
+    }
+  }
+);
+
+const AppNavigator = createSwitchNavigator({
+  Login: LoginScreen,
+  Main: MainTabs
+});
 
 export default class App extends React.Component {
   state = {
-    showContacts: true,
-    showForm: false,
-    contacts: contacts,
+    contacts
   };
 
   addContact = newContact => {
     this.setState(prevState => ({
-      showForm: false,
-      contacts: [...prevState.contacts, newContact],
+      contacts: [...prevState.contacts, newContact]
     }));
-  };
-
-  toggleContacts = () => {
-    this.setState(prevState => ({ showContacts: !prevState.showContacts }));
-  };
-
-  sort = () => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.sort(compareNames),
-    }));
-  };
-
-  showForm = () => {
-    this.setState({ showForm: true });
   };
 
   render() {
-    if (this.state.showForm)
-      return <AddContactForm onSubmit={this.addContact} />;
     return (
-      <View style={styles.container}>
-        <Button title="toggle contacts" onPress={this.toggleContacts} />
-        <Button title="add contact" onPress={this.showForm} />
-        {this.state.showContacts && (
-          <SectionListContacts contacts={this.state.contacts} />
-        )}
-      </View>
+      <AppNavigator
+        screenProps={{
+          contacts: this.state.contacts,
+          addContact: this.addContact
+        }}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: Constants.statusBarHeight,
-  },
-});
