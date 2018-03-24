@@ -46,6 +46,9 @@ const FriendsScreen = ({ navigation }) => (
 // Do not edit anything above this line
 /////
 
+// The reasoning for this solution is explained here:
+// https://v2.reactnavigation.org/docs/common-mistakes.html#explicitly-rendering-more-than-one-navigator
+
 const ContactScreen = createTabNavigator({
   InfoScreen,
   FriendsScreen,
