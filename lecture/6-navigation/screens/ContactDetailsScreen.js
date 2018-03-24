@@ -18,7 +18,7 @@ export default class ContactDetailsScreen extends React.Component {
   }
 
   goToRandomContact = () => {
-    const contacts = this.props.navigation.getParam('contacts');
+    const { contacts } = this.props.screenProps;
     const phone = this.props.navigation.getParam('phone');
     let randomContact;
     while (!randomContact) {
@@ -30,11 +30,9 @@ export default class ContactDetailsScreen extends React.Component {
 
     // this.props.navigation.navigate('ContactDetails', {
     //   ...randomContact,
-    //   contacts,
     // });
     this.props.navigation.push('ContactDetails', {
       ...randomContact,
-      contacts,
     });
   };
 }

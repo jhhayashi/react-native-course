@@ -26,15 +26,7 @@ export default class ContactListScreen extends React.Component {
   };
 
   handleSelectContact = contact => {
-    this.props.navigation.navigate({
-      routeName: 'ContactDetails',
-      params: {
-        name: contact.name,
-        phone: contact.phone,
-        contacts: this.props.screenProps.contacts,
-      },
-      key: contact.phone,
-    });
+    this.props.navigation.push('ContactDetails', contact);
   };
 
   render() {
