@@ -32,15 +32,22 @@ export default class App extends React.Component {
   modifyObject = (key, val) => {
     let parsed
     try {
+      // if the value is valid js, treat it as so (objects, arrays, etc)
       parsed = JSON.parse(val)
     } catch (err) {
+      // otherwise treat as a string
       parsed = val
     }
 
     this.setState(prevState => {
+      // if the key's value is an array, add to the array
       if (prevState.obj[key] instanceof Array) {
+        // clone the object, then overwrite the particular key that we're editing
+        // by cloning that array and adding the new value at the beginning
         return {showForm: false, obj: {...prevState.obj, [key]: [parsed, ...prevState.obj[key]]}}
       }
+
+      // if the the value wasn't an array, set the key to be the new value
       return {showForm: false, obj: {...prevState.obj, [key]: parsed}}
     })
   }

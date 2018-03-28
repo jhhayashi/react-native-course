@@ -1,33 +1,27 @@
-import React from 'react';
-import { Button, View, StyleSheet } from 'react-native';
+import React from 'react'
+import {Button, View, StyleSheet} from 'react-native'
 
-import SectionListContacts from '../SectionListContacts';
+import SectionListContacts from '../SectionListContacts'
 
 export default class ContactListScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerTitle: 'Contacts',
-      headerRight: (
-        <Button
-          title="Add"
-          onPress={() => navigation.navigate('AddContact')}
-          color="#a41034"
-        />
-      ),
-    };
-  };
+  static navigationOptions = ({navigation}) => ({
+    headerTitle: 'Contacts',
+    headerRight: (
+      <Button title="Add" onPress={() => navigation.navigate('AddContact')} color="#a41034" />
+    ),
+  })
 
   state = {
     showContacts: true,
-  };
+  }
 
   toggleContacts = () => {
-    this.setState(prevState => ({ showContacts: !prevState.showContacts }));
-  };
+    this.setState(prevState => ({showContacts: !prevState.showContacts}))
+  }
 
   handleSelectContact = contact => {
-    this.props.navigation.push('ContactDetails', contact);
-  };
+    this.props.navigation.push('ContactDetails', contact)
+  }
 
   render() {
     return (
@@ -40,7 +34,7 @@ export default class ContactListScreen extends React.Component {
           />
         )}
       </View>
-    );
+    )
   }
 }
 
@@ -48,4 +42,4 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-});
+})
