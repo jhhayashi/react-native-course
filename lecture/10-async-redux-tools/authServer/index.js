@@ -19,7 +19,7 @@ app.post('*', (req, res) => {
   // an attacker can probe the server to find all of the usernames.
   if (!users[username]) return res.status(403).send('User does not exist')
   if (users[username] !== password) return res.status(403).send('Incorrect password')
-  return res.status(200).send()
+  return res.json({token: 'thisIsAToken'})
 })
 
 // catch 404
