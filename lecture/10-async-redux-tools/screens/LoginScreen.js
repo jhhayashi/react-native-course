@@ -1,22 +1,30 @@
 import React from 'react'
 import {Button, View, StyleSheet, Text, TextInput} from 'react-native'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
-import {login} from '../api'
+import {logInUser} from '../redux/actions'
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
+  static propTypes = {
+    err: PropTypes.string,
+    token: PropTypes.string,
+    logInUser: PropTypes.func,
+  }
+
   state = {
     username: '',
     password: '',
   }
 
-  _login = async () => {
-    try {
-      const success = await login(this.state.username, this.state.password)
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.token) {
       this.props.navigation.navigate('Main')
-    } catch (err) {
-      const errMessage = err.message
-      this.setState({err: errMessage})
     }
+  }
+
+  _login = async () => {
+    this.props.logInUser(this.state.username, this.state.password)
   }
 
   handleUsernameUpdate = username => {
@@ -30,7 +38,7 @@ export default class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.error}>{this.state.err}</Text>
+        <Text style={styles.error}>{this.props.err}</Text>
         <TextInput
           placeholder="username"
           value={this.state.username}
@@ -62,3 +70,10 @@ const styles = StyleSheet.create({
     color: 'red',
   },
 })
+
+const mapStateToProps = state => ({
+  err: state.user.loginErr,
+  token: state.user.token,
+})
+
+export default connect(mapStateToProps, {logInUser})(LoginScreen)

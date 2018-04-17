@@ -17,9 +17,12 @@ export const login = async (username, password) => {
   })
 
   if (response.ok) {
-    return true
+    const {token} = await response.json()
+    return token
   }
 
   const errMessage = await response.text()
   throw new Error(errMessage)
 }
+
+export const poorlyFormatted = usedVar => usedVar
