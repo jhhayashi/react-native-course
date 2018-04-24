@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 
 import FlatListContacts from '../FlatListContacts'
 import ScrollViewContacts from '../ScrollViewContacts'
+import {changeFirstContact} from '../redux/actions'
 
 // eslint-disable-next-line no-constant-condition
 const ContactsList = false ? FlatListContacts : ScrollViewContacts
@@ -29,6 +30,7 @@ class ContactListScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Button title="toggle contacts" onPress={this.toggleContacts} />
+        <Button title="change first contact" onPress={this.props.changeFirstContact} />
         {this.state.showContacts && <ContactsList contacts={this.props.contacts} />}
       </View>
     )
@@ -39,4 +41,4 @@ const mapStateToProps = state => ({
   contacts: state.contacts,
 })
 
-export default connect(mapStateToProps)(ContactListScreen)
+export default connect(mapStateToProps, {changeFirstContact})(ContactListScreen)

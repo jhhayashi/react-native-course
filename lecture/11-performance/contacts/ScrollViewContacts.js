@@ -5,11 +5,13 @@ import PropTypes from 'prop-types'
 import Row from './Row'
 
 const ScrollViewContacts = props => (
-  <ScrollView>{props.contacts.map(contact => <Row onSelectContact={props.onSelectContact} {...contact} />)}</ScrollView>
+  <ScrollView>
+    {props.contacts.map(contact => <Row onSelectContact={props.onSelectContact} {...contact} />)}
+  </ScrollView>
 )
 
 ScrollViewContacts.propTypes = {
-  contacts: PropTypes.array,
+  contacts: PropTypes.array, //eslint-disable-line
   onSelectContact: PropTypes.func,
 }
 

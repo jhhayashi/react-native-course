@@ -3,9 +3,10 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 
 import {Countdown, TimeInput, TimerToggleButton} from './components'
 import {Timer, vibrate} from './utils'
+import ProgressBar from './ProgressBarAnimated'
 
-const DEFAULT_WORK_MINS = 25
-const DEFAULT_BREAK_MINS = 5
+const DEFAULT_WORK_MINS = 0.1
+const DEFAULT_BREAK_MINS = 0.1
 
 const minToSec = mins => mins * 60
 const nextTimer = {work: 'break', break: 'work'}
@@ -65,11 +66,27 @@ export default class App extends React.Component {
     this.setState(prevState => ({activeTimer: nextTimer[prevState.activeTimer]}), this.resetTimer)
   }
 
+  getTimeTotal = () => {
+    const {workTime, breakTime} = this.state
+    return (this.state.activeTimer === 'work' ? workTime : breakTime) * 1000
+  }
+
+  block() {
+    const doneTime = Date.now() + 200
+    while (Date.now() < doneTime) {}
+  }
+
   render() {
+    if (Math.round(Math.random())) this.block()
     return (
       <View style={styles.container}>
         <Text style={[styles.title, styles.center]}>{this.state.activeTimer.toUpperCase()} TIMER</Text>
         <Countdown style={styles.center} timeRemaining={this.state.timeRemaining} onToggleTimer={this.toggleTimer} />
+        <ProgressBar
+          timeRemaining={this.state.timeRemaining}
+          timeTotal={this.getTimeTotal()}
+          isRunning={this.state.isRunning}
+        />
         <View style={[styles.buttonGroup, styles.center]}>
           <TimerToggleButton onToggle={this.toggleTimer} isRunning={this.state.isRunning} />
           <Button title="Reset" onPress={this.resetTimer} />

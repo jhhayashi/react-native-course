@@ -1,3 +1,5 @@
+const TICK_DURATION = 1000 / 60
+
 export default class Timer {
   constructor(duration, onTick, onEnd) {
     this.duration = duration
@@ -28,7 +30,7 @@ export default class Timer {
       this.onTick(this.timeRemaining)
 
       // account for any delays or time drift
-      const nextTick = this.timeRemaining % 1000
+      const nextTick = this.timeRemaining % TICK_DURATION
 
       this.timeout = setTimeout(this.tick, nextTick)
     }

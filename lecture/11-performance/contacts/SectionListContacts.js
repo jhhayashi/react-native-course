@@ -1,9 +1,12 @@
+/* eslint-disable */
+
 import React from 'react'
 import {SectionList, Text} from 'react-native'
 import PropTypes from 'prop-types'
 
 import Row from './Row'
 
+// eslint-disable-next-line
 const renderSectionHeader = ({section}) => <Text>{section.title}</Text>
 
 const SectionListContacts = props => {
