@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`contact reducer successfully adds new user 1`] = `
+Object {
+  "contacts": Array [
+    Object {
+      "name": "test user",
+      "phone": "1234567890",
+    },
+  ],
+  "user": Object {
+    "prevContact": Object {
+      "name": "test user",
+      "phone": "1234567890",
+    },
+  },
+}
+`;
+
+exports[`user reducer successfully updates user 1`] = `
+Object {
+  "contacts": Array [],
+  "user": Object {
+    "name": "test user",
+  },
+}
+`;
