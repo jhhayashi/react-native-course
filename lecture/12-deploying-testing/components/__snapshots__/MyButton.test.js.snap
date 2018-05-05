@@ -50,6 +50,9 @@ exports[`MyButton renders 1`] = `
             "padding": 8,
             "textAlign": "center",
           },
+          Object {
+            "color": "green",
+          },
         ]
       }
     >
